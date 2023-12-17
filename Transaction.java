@@ -1,13 +1,33 @@
 package collectionApi.groupProject;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 public class Transaction {
     private int transactionId;
     private int fromAccountId;
     private int toAccountId;
     private double amount;
+    private LocalDateTime timeStamp;
 
+    public Transaction(LocalDateTime timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public Transaction (){
+    timeStamp = LocalDateTime.now();
+
+}
     public int getTransactionId() {
         return transactionId;
+    }
+
+    public LocalDateTime getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(LocalDateTime timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public void setTransactionId(int transactionId) {
@@ -55,6 +75,7 @@ public class Transaction {
                 ", fromAccountId=" + fromAccountId +
                 ", toAccountId=" + toAccountId +
                 ", amount=" + amount +
+                ", timeStamp=" + timeStamp +
                 '}';
     }
 }

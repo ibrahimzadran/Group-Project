@@ -3,33 +3,59 @@ package collectionApi.groupProject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionServicesImpl implements TransactionServices{
+public class TransactionServicesImpl implements TransactionServices {
 
     private static List<Transaction> transactionDb;
+
     public TransactionServicesImpl() {
         this.transactionDb = new ArrayList<>();
     }
 
 
-
     @Override
-    public void createTransaction(int fromAccountId, int toAccountId, double amount) {
+    public void createTransaction(Transaction transaction) {
+        transactionDb.add(transaction);
 
 
     }
 
     @Override
-    public void updateTransaction(double newAmount) {
+    public void updateTransaction(Transaction transaction) {
+        transaction.setAmount(transaction.getAmount());
+        transaction.setTimeStamp(transaction.getTimeStamp());
 
-    }
+
+
+        }
+//        transaction.setTransactionId(transaction.getFromAccountId());
+//        transaction.setTimeStamp(transaction.getTimeStamp());
+
+
 
     @Override
     public void deleteTransaction(int transactionId) {
+        Transaction transactionToRemove = null;
+        for (Transaction transaction : transactionDb) {
+            if (transaction.getTransactionId() == transactionId) {
+                transactionToRemove = transaction;
+                break;
+            }
+            if (transactionToRemove != null) {
+                transactionDb.remove(transactionToRemove);
+            }
 
+        }
     }
 
     @Override
     public void displayTransaction() {
+        if(transactionDb.isEmpty()){
+            System.out.println("No transaction to display ");
+        }else
+            for (Transaction transaction : transactionDb) {
+                System.out.println(transaction);
+
+            }
 
     }
 }
